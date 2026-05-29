@@ -1,12 +1,19 @@
+import { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </>
+  );
+};
+
 const Rating = () => {
-  //   return <div style={styles.container}>Rate Your Experience!</div>;
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(false);
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
-  const clicked = (index) => {
-    console.log("clicked", index);
-  };
-  const hovered = (state, index) => {
-    console.log("hovered", state, index);
-  };
 
   return (
     <div className="rating-container">
@@ -15,9 +22,9 @@ const Rating = () => {
         {stars.map((star) => (
           <span
             key={star}
-            onClick={() => clicked(star)}
-            onMouseEnter={() => hovered("enter", star)}
-            onMouseLeave={() => hovered("leave", star)}
+            onClick={() => setRating(star)}
+            onMouseEnter={() => setHover(star)}
+            onMouseLeave={() => setHover(0)}
           >
             {"\u2605"}
           </span>
