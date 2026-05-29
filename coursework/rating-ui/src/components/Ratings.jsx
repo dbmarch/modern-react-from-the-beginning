@@ -1,19 +1,11 @@
 import { useState } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <>
-      <h2>Count: {count}</h2>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </>
-  );
-};
-
 const Rating = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(false);
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
+  const starChar = "\u2605";
+  const feedbackMessages = ["Very Bad", "Bad", "Okay", "Good", "Excellent"];
 
   return (
     <div className="rating-container">
@@ -25,11 +17,17 @@ const Rating = () => {
             onClick={() => setRating(star)}
             onMouseEnter={() => setHover(star)}
             onMouseLeave={() => setHover(0)}
+            className={`star ${star <= (hover || rating) ? "active" : ""}`}
           >
-            {"\u2605"}
+            {starChar}
           </span>
         ))}
       </div>
+      {rating > 0 && (
+        <div className="feedback">
+          <p>{feedbackMessages[rating - 1]}</p>
+        </div>
+      )}
     </div>
   );
 };
