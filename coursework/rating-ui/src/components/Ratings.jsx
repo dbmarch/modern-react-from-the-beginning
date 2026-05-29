@@ -1,8 +1,11 @@
 const Rating = () => {
   //   return <div style={styles.container}>Rate Your Experience!</div>;
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
-  const clicked = () => {
-    console.log("clicked");
+  const clicked = (index) => {
+    console.log("clicked", index);
+  };
+  const hovered = (state, index) => {
+    console.log("hovered", state, index);
   };
 
   return (
@@ -10,7 +13,12 @@ const Rating = () => {
       <h2>Rate Your Experience!</h2>
       <div className="stars">
         {stars.map((star) => (
-          <span key={star} onClick={clicked}>
+          <span
+            key={star}
+            onClick={() => clicked(star)}
+            onMouseEnter={() => hovered("enter", star)}
+            onMouseLeave={() => hovered("leave", star)}
+          >
             {"\u2605"}
           </span>
         ))}
