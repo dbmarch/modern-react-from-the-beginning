@@ -1,15 +1,13 @@
 const Rating = () => {
-  return (
-    <div
-      style={{
-        textAlign: "center",
-        fontFamily: "Arial, sans-serif",
-        padding: "20px",
-      }}
-    >
-      Rate Your Experience!
-    </div>
-  );
+  return <div style={styles.container}>Rate Your Experience!</div>;
+};
+
+const styles = {
+  container: {
+    textAlign: "center",
+    fontFamily: "Arial, sans-serif",
+    padding: "20px",
+  },
 };
 
 export default Rating;
