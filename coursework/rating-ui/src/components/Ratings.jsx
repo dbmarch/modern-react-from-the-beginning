@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Rating = () => {
+const Rating = ({ heading = "Rate Your Experience!" }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(false);
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
@@ -9,7 +9,7 @@ const Rating = () => {
 
   return (
     <div className="rating-container">
-      <h2>Rate Your Experience!</h2>
+      <h2>{heading}</h2>
       <div className="stars">
         {stars.map((star) => (
           <span

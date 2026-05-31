@@ -12,7 +12,7 @@ const Counter = () => {
 const App = () => {
   return (
     <>
-      <Rating />
+      <Rating heading="How would you rate your experience?" />
       <Counter />
     </>
   );
