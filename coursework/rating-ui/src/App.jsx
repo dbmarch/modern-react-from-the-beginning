@@ -12,7 +12,11 @@ const Counter = () => {
 const App = () => {
   return (
     <>
-      <Rating heading="How would you rate your experience?" />
+      <Rating
+        heading="How would you rate your experience?"
+        color="blue"
+        feedback={["Very Bad", "Bad", "Okay", "Good", "Excellent"]}
+      />
       <Counter />
     </>
   );

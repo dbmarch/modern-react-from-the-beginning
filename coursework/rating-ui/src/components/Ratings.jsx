@@ -1,26 +1,41 @@
 import { useState } from "react";
-
-const Rating = ({ heading = "Rate Your Experience!" }) => {
+import Star from "./Star";
+import Modal from "./Modal";
+const Rating = ({
+  heading = "Rate Your Experience!",
+  feedbackMessages = ["Very Bad", "Bad", "Okay", "Good", "Excellent"],
+}) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const stars = Array.from({ length: 5 }, (_, i) => i + 1);
-  const starChar = "\u2605";
-  const feedbackMessages = ["Very Bad", "Bad", "Okay", "Good", "Excellent"];
 
+  const handleSubmit = () => {
+    if (rating > 0 && !submitted) {
+      setSubmitted(true);
+    }
+  };
+
+  const closeModal = () => {
+    setSubmitted(false);
+    setRating(0);
+  };
   return (
     <div className="rating-container">
       <h2>{heading}</h2>
       <div className="stars">
         {stars.map((star) => (
-          <span
+          <Star
             key={star}
-            onClick={() => setRating(star)}
-            onMouseEnter={() => setHover(star)}
-            onMouseLeave={() => setHover(0)}
+            star={star}
+            rating={rating}
+            hover={hover}
+            color="gold"
+            hoverEnter={() => setHover(star)}
+            hoverLeave={() => setHover(0)}
+            ratingClick={() => setRating(star)}
             className={`star ${star <= (hover || rating) ? "active" : ""}`}
-          >
-            {starChar}
-          </span>
+          />
         ))}
       </div>
       {rating > 0 && (
@@ -28,16 +43,16 @@ const Rating = ({ heading = "Rate Your Experience!" }) => {
           <p>{feedbackMessages[rating - 1]}</p>
         </div>
       )}
+      <button
+        className="submit-btn"
+        onClick={handleSubmit}
+        disabled={rating === 0}
+      >
+        Submit
+      </button>
+      <Modal isOpen={submitted} onClose={closeModal} rating={rating} />
     </div>
   );
 };
-
-// const styles = {
-//   container: {
-//     textAlign: "center",
-//     fontFamily: "Arial, sans-serif",
-//     padding: "20px",
-//   },
-// };
 
 export default Rating;
